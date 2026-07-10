@@ -1,0 +1,534 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LSPD | قوانين الشرطة</title>
+<meta name="description" content="الدليل الرسمي للقوانين والأنظمة الخاصة بمنتسبي جهاز الشرطة"/>
+<meta name="theme-color" content="#0078ff"/>
+<link rel="icon" href="logo.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&amp;family=Orbitron:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Tajawal',sans-serif;background:#060a14;min-height:100vh;color:#fff;overflow-x:hidden;animation:pageIn .6s ease-out}
+@keyframes pageIn{0%{opacity:0}100%{opacity:1}}
+.bg-img{position:fixed;inset:0;z-index:-3;background:url('bg1.png') center/cover no-repeat;filter:brightness(0.08) saturate(1.6)}
+.bg-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,20,0.15) 0%,rgba(6,10,20,0.45) 30%,rgba(6,10,20,0.85) 65%,#060a14 100%)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#060a14}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#0078ff,#00c6ff);border-radius:2px}
+#scrollBar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#0078ff,#00c6ff,#0078ff);z-index:999;width:0%;transition:width .1s;box-shadow:0 0 12px rgba(0,120,255,.4)}
+.bg-orb{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-orb .o{position:absolute;border-radius:50%;filter:blur(160px)}
+.bg-orb .o:nth-child(1){width:800px;height:800px;background:rgba(0,100,255,.1);top:-25%;left:-20%;animation:f1 22s ease-in-out infinite}
+.bg-orb .o:nth-child(2){width:600px;height:600px;background:rgba(0,180,255,.07);bottom:-20%;right:-15%;animation:f2 25s ease-in-out infinite}
+.bg-orb .o:nth-child(3){width:500px;height:500px;background:rgba(0,220,255,.05);top:35%;left:45%;animation:f3 28s ease-in-out infinite}
+@keyframes f1{0%,100%{transform:translate(0,0)}33%{transform:translate(160px,140px)}66%{transform:translate(-80px,180px)}}
+@keyframes f2{0%,100%{transform:translate(0,0)}33%{transform:translate(-140px,-160px)}66%{transform:translate(160px,-120px)}}
+@keyframes f3{0%,100%{transform:translate(-50%,-50%)scale(1)}50%{transform:translate(-50%,-50%)scale(1.6)}}
+.grid-ov{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(0,150,255,.03)1px,transparent 1px),linear-gradient(90deg,rgba(0,150,255,.03)1px,transparent 1px);background-size:45px 45px}
+.scanline{position:fixed;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,150,255,.01) 2px,rgba(0,150,255,.01) 4px)}
+.edge-t{position:fixed;top:0;left:0;right:0;height:1px;z-index:2;background:linear-gradient(90deg,transparent,rgba(0,150,255,.5),rgba(0,200,255,.3),transparent)}
+.edge-b{position:fixed;bottom:0;left:0;right:0;height:1px;z-index:2;background:linear-gradient(90deg,transparent,rgba(0,150,255,.3),rgba(0,200,255,.15),transparent)}
+.corner{position:fixed;z-index:2;pointer-events:none}
+.corner.tl{top:0;left:0;width:120px;height:120px}
+.corner.tl::before{content:'';position:absolute;top:0;left:0;width:160px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,150,255,.35));transform:rotate(42deg);transform-origin:0 0}
+.corner.tl::after{content:'';position:absolute;top:0;left:0;width:100px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,150,255,.35));transform:rotate(28deg);transform-origin:0 0}
+.corner.br{bottom:0;right:0;width:120px;height:120px}
+.corner.br::before{content:'';position:absolute;bottom:0;right:0;width:160px;height:1px;background:linear-gradient(90deg,rgba(0,150,255,.35),transparent);transform:rotate(42deg);transform-origin:100% 100%}
+.corner.br::after{content:'';position:absolute;bottom:0;right:0;width:100px;height:1px;background:linear-gradient(90deg,rgba(0,150,255,.35),transparent);transform:rotate(28deg);transform-origin:100% 100%}
+.g{background:rgba(10,15,28,.5);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid rgba(255,255,255,.06);transition:all .5s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.2);transform:translateY(0)}
+.g::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,150,255,.5),rgba(0,200,255,.3),transparent)}
+.g::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,150,255,.2),transparent)}
+.g:hover{border-color:rgba(0,150,255,.2)!important;transform:translateY(-2px);box-shadow:0 12px 48px rgba(0,120,255,.1)}
+.g .g-glow{position:absolute;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(0,150,255,.06),transparent 55%);opacity:0;transition:opacity .7s}
+.g:hover .g-glow{opacity:1}
+.g2{background:rgba(10,15,28,.35);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.05);transition:all .4s;position:relative}
+.g2:hover{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.1)}
+.gg{background:rgba(10,15,28,.25);backdrop-filter:blur(36px);-webkit-backdrop-filter:blur(36px);border:1px solid rgba(255,255,255,.04);transition:all .45s;position:relative}
+.gg:hover{background:rgba(255,255,255,.04);border-color:rgba(0,150,255,.15)}
+#toTop{position:fixed;bottom:24px;right:24px;width:40px;height:40px;border-radius:12px;background:rgba(0,120,255,.1);border:1px solid rgba(0,120,255,.2);color:#0096ff;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transition:all .4s;z-index:99;font-size:1.1rem;backdrop-filter:blur(12px)}
+.nav-qs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:10px 14px;border-radius:10px;justify-content:center}
+.nav-qs a{font-size:.72rem;color:rgba(255,255,255,.45);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:5px 12px;text-decoration:none;transition:all .3s;cursor:pointer}
+.nav-qs a:hover{color:#fff;background:rgba(0,120,255,.12);border-color:rgba(0,120,255,.3)}
+#toTop.show{opacity:1;visibility:visible}
+#toTop:hover{background:rgba(0,120,255,.2);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,120,255,.2)}
+#searchInput{width:100%;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.6);font-family:'Tajawal',sans-serif;font-size:.78rem;outline:none;transition:all .35s;margin-bottom:16px;text-align:right}
+#searchInput:focus{border-color:rgba(0,120,255,.35);background:rgba(0,120,255,.06);color:#fff;box-shadow:0 0 24px rgba(0,120,255,.06)}
+#searchInput::placeholder{color:rgba(255,255,255,.2)}
+.container{max-width:920px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.top-bar{margin-bottom:20px;padding:7px 18px;border-radius:10px;display:inline-flex;width:auto}
+.top-bar .tb-in{display:flex;align-items:center;gap:10px}
+.top-bar .tb-t{font-family:'Orbitron',sans-serif;font-size:.55rem;font-weight:700;color:rgba(255,255,255,.3);letter-spacing:4px}
+header{padding:40px 20px 28px;text-align:center;position:relative;z-index:1}
+.badge-pr{display:inline-flex;align-items:center;gap:10px;padding:6px 18px;border-radius:50px;background:rgba(0,120,255,.07);border:1px solid rgba(0,120,255,.22);font-family:'Orbitron',sans-serif;font-size:.6rem;color:#0096ff;letter-spacing:2px;box-shadow:0 0 40px rgba(0,120,255,.1);margin-bottom:32px}
+.logo-section{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:32px;flex-wrap:wrap}
+.logo-badge{display:inline-flex;align-items:center;gap:16px;padding:14px 32px;border-radius:18px;background:rgba(255,255,255,.04);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.07);font-weight:700;font-size:1.05rem;transition:all .4s}
+.logo-badge:hover{border-color:rgba(0,150,255,.35);background:rgba(255,255,255,.07);transform:translateY(-3px);box-shadow:0 8px 48px rgba(0,120,255,.1)}
+.logo-badge .ic{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,rgba(0,120,255,.35),rgba(0,198,255,.2));border:1px solid rgba(0,150,255,.3)}
+.logo-badge .lb{display:flex;flex-direction:row;align-items:center;gap:10px}
+.logo-badge .lb>div{display:flex;flex-direction:column;align-items:flex-start}
+.rh{flex-shrink:0;animation:rhGlow 3s ease-in-out infinite}
+@keyframes rhGlow{0%,100%{opacity:.7;filter:drop-shadow(0 0 4px rgba(0,150,255,.2))}50%{opacity:1;filter:drop-shadow(0 0 12px rgba(0,150,255,.5))}}
+.logo-badge .lb .ar{font-family:'Tajawal',sans-serif;font-size:1.05rem;color:#fff;line-height:1.3}
+.logo-badge .lb .ar span{color:#0096ff}
+.logo-badge .lb .en{font-family:'Orbitron',sans-serif;font-size:.55rem;color:rgba(255,255,255,.3);letter-spacing:2px;margin-top:1px}
+.disc-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;background:rgba(88,101,242,.12);border:1px solid rgba(88,101,242,.25);color:#5865f2;font-family:'Orbitron',sans-serif;font-size:.55rem;text-decoration:none;transition:all .35s;flex-shrink:0;letter-spacing:.5px}
+.disc-btn:hover{background:rgba(88,101,242,.22);border-color:rgba(88,101,242,.4);transform:translateY(-2px);box-shadow:0 4px 24px rgba(88,101,242,.18)}
+h1{font-size:2.8rem;font-weight:900;margin-bottom:6px;line-height:1.2;letter-spacing:1px;position:relative}
+h1::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:80px;height:2px;background:linear-gradient(90deg,transparent,#0078ff,transparent);opacity:.5;border-radius:1px}
+h1 .glow{background:linear-gradient(135deg,#0078ff,#00c6ff,#0078ff);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s ease-in-out infinite;filter:drop-shadow(0 0 40px rgba(0,150,255,.15))}
+@keyframes shimmer{0%,100%{background-position:0% center}50%{background-position:100% center}}
+.subtitle{font-family:'Orbitron',sans-serif;font-size:.75rem;color:#0096ff;letter-spacing:6px;margin-bottom:6px}
+.desc{color:rgba(255,255,255,.35);font-size:.85rem;max-width:520px;margin:8px auto 0;line-height:1.8}
+.header-line{display:flex;align-items:center;gap:12px;justify-content:center;margin:16px auto 0;max-width:160px}
+.header-line .ln{flex:1;height:1px}
+.header-line .dm{width:6px;height:6px;background:rgba(0,120,255,.8);transform:rotate(45deg);flex-shrink:0;box-shadow:0 0 10px rgba(0,120,255,.4)}
+.live-bar{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px;padding:8px 20px;border-radius:12px;flex-wrap:wrap;animation:borderPulse 3s ease-in-out infinite}
+.live-item .tm{font-size:.55rem;color:rgba(255,255,255,.12);font-family:'Orbitron',sans-serif;direction:ltr;display:inline-block}
+@keyframes borderPulse{0%,100%{border-color:rgba(255,255,255,.06)}50%{border-color:rgba(0,150,255,.15)}}
+.live-item{display:flex;align-items:center;gap:8px;font-size:.7rem;color:rgba(255,255,255,.35);font-family:'Orbitron',sans-serif}
+.live-item .dot{width:6px;height:6px;border-radius:50%;background:#00c853;animation:pulseDot 2s ease-in-out infinite}
+@keyframes pulseDot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,200,83,.4)}50%{opacity:.5;box-shadow:0 0 0 6px rgba(0,200,83,0)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.stat-card{padding:18px 12px;text-align:center;border-radius:14px;cursor:default}
+.stat-card .num{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,#0078ff,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-card .lbl{color:rgba(255,255,255,.3);font-size:.68rem;margin-top:4px}
+#soundToggle{position:fixed;bottom:24px;left:24px;width:40px;height:40px;border-radius:12px;background:rgba(0,150,255,.08);border:1px solid rgba(0,150,255,.15);color:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:99;font-size:.65rem;font-family:'Orbitron',sans-serif;backdrop-filter:blur(12px);transition:all .35s;letter-spacing:1px}
+#soundToggle.on{background:rgba(0,200,83,.12);border-color:rgba(0,200,83,.25);color:#00c853}
+#soundToggle:hover{transform:scale(1.1)}
+.filter-bar{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:20px;padding:10px;border-radius:14px}
+.filter-btn{padding:5px 13px;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:rgba(255,255,255,.02);color:rgba(255,255,255,.28);font-family:'Tajawal',sans-serif;font-size:.7rem;cursor:pointer;transition:all .35s}
+.filter-btn:hover{background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.08)}
+.filter-btn.active{background:rgba(0,120,255,.15)!important;border-color:rgba(0,120,255,.35)!important;color:#0096ff!important;box-shadow:0 0 24px rgba(0,120,255,.12)}
+.s-card.opn{border-color:rgba(0,150,255,.2)!important;box-shadow:0 8px 56px rgba(0,120,255,.12),inset 0 1px 0 rgba(0,150,255,.06)}
+.s-card{border-radius:14px;margin-bottom:12px;overflow:hidden}
+.s-hdr{width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:none;border:none;cursor:pointer;color:#fff;font-family:'Tajawal',sans-serif;transition:all .35s;text-align:right;direction:rtl}
+.s-hdr:hover{background:rgba(255,255,255,.03)}
+.s-hdr .lft{display:flex;align-items:center;gap:11px}
+.s-hdr .ico{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.s-hdr .nfo{text-align:right}
+.s-hdr .nfo h3{font-size:.88rem;font-weight:700}
+.s-hdr .nfo p{font-size:.5rem;font-family:'Orbitron',sans-serif;margin-top:2px}
+.s-hdr .arr{color:rgba(255,255,255,.18);transition:transform .5s cubic-bezier(.4,0,.2,1);font-size:.9rem;flex-shrink:0}
+.s-hdr .arr.opn{transform:rotate(180deg)}
+.s-body{padding:0 16px 0;max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),padding .45s cubic-bezier(.4,0,.2,1)}
+.s-body.opn{max-height:6000px;padding:0 16px 16px}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,200,83,.15);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(0,200,83,.3);color:#00c853;padding:10px 24px;border-radius:12px;font-size:.75rem;font-family:'Tajawal',sans-serif;z-index:999;opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);white-space:nowrap;box-shadow:0 4px 32px rgba(0,0,0,.4)}
+.toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.s-body .in-dv{height:1px;margin-bottom:10px}
+.r-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:8px;background:rgba(255,255,255,.015);margin-bottom:4px;cursor:pointer;transition:all .25s}
+.r-item:hover{background:rgba(255,255,255,.03)}
+.r-item:active{transform:scale(.97)}
+.r-num{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.55rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.r-txt{color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.75;text-align:right;flex:1}
+.cpy-btn{width:24px;height:24px;border-radius:5px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);color:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .3s;font-size:.5rem;font-family:'Orbitron',sans-serif}
+.cpy-btn:hover{background:rgba(0,150,255,.12);border-color:rgba(0,150,255,.25);color:#0096ff}
+.cpy-btn.cpd{background:rgba(0,200,83,.12)!important;border-color:rgba(0,200,83,.25)!important;color:#00c853!important}
+.sub-sec{margin-bottom:12px}
+.sub-ttl{font-size:.8rem;font-weight:700;margin-bottom:8px;text-align:right}
+.gr2{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}
+.gr3{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.ch-it{display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:6px;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.03)}
+.ch-no{width:26px;height:26px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.55rem;font-weight:700;flex-shrink:0}
+.ch-ds{color:rgba(255,255,255,.45);font-size:.68rem;text-align:right}
+.pg3{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.pg-it{padding:10px;border-radius:8px;text-align:center}
+.pg-it .pt{font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:700;margin-bottom:3px}
+.pg-it .pd{font-size:.62rem;color:rgba(255,255,255,.35)}
+.ex-box{margin-top:12px;padding:12px;border-radius:8px}
+.rank-it{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.03);background:rgba(255,255,255,.01)}
+.rank-no{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:700;flex-shrink:0}
+.rank-info{display:flex;flex-direction:column;align-items:flex-start;gap:1px}
+.rank-t{font-size:.72rem;font-weight:600}
+.rank-en{font-family:'Orbitron',sans-serif;font-size:.5rem;color:rgba(255,255,255,.2);letter-spacing:1px}
+.pen-it{padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.03);background:rgba(255,255,255,.008);margin-bottom:6px}
+.pen-h{margin-bottom:4px}
+.pen-lv{font-size:.72rem;font-weight:700}
+.pen-d{font-size:.65rem;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:4px}
+.pen-a{display:inline-block;padding:3px 10px;border-radius:5px;font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:600;letter-spacing:.5px}
+.eq-it{padding:7px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.03);background:rgba(255,255,255,.01);display:flex;align-items:center;gap:8px}
+.eq-ic{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.65rem}
+.eq-info{display:flex;flex-direction:column;align-items:flex-start;gap:1px;flex:1}
+.eq-t{font-size:.7rem;font-weight:600}
+.eq-d{font-family:'Orbitron',sans-serif;font-size:.48rem;color:rgba(255,255,255,.2);letter-spacing:.5px}
+.hl{background:rgba(255,193,7,.1)!important;border-color:rgba(255,193,7,.2)!important}
+.hl .r-txt{color:rgba(255,255,255,.85)!important}
+@keyframes si{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
+.si{animation:si .5s ease-out forwards}
+footer{text-align:center;padding:20px;border-top:1px solid rgba(0,120,255,.06);margin-top:40px;position:relative;z-index:1}
+footer .ft-ln{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+footer p{font-family:'Orbitron',sans-serif;font-size:.5rem;color:rgba(255,255,255,.12);letter-spacing:2px}
+footer .ver{font-family:'Orbitron',sans-serif;font-size:.45rem;color:rgba(255,255,255,.08);letter-spacing:1px}
+@media(max-width:600px){
+h1{font-size:1.7rem}
+.logo-badge{padding:10px 18px;font-size:.9rem;flex-wrap:wrap;justify-content:center}
+.logo-badge .ic{width:38px;height:38px}
+.logo-badge .lb .ar{font-size:.85rem}
+.live-bar{gap:10px}
+.stats{gap:5px}
+.stat-card{padding:12px 6px}
+.stat-card .num{font-size:1.1rem}
+.gr2,.gr3,.pg3{grid-template-columns:1fr}
+header{padding:24px 14px 18px}
+.site-brand{padding:4px 14px 4px 8px}
+.site-brand .sld{width:28px;height:28px}
+.top-bar{margin-bottom:14px}
+.top-bar .tb-t{font-size:.45rem;letter-spacing:2px}
+.filter-btn{padding:4px 9px;font-size:.6rem}
+.s-hdr{padding:12px 12px}
+.s-body.opn{padding:0 12px 12px}
+.s-hdr .ico{width:28px;height:28px}
+.s-hdr .ico svg{width:13px;height:13px}
+.s-hdr .nfo h3{font-size:.78rem}
+.r-txt{font-size:.72rem}
+.r-item{padding:6px 8px}
+.disc-btn{padding:4px 8px}
+.logo-badge .lb{gap:5px}
+.badge-pr{font-size:.5rem;padding:4px 12px}
+.desc{font-size:.78rem}
+#searchInput{font-size:.72rem;padding:8px 12px}
+.rank-t{font-size:.65rem}
+.pen-lv{font-size:.65rem}
+.pen-d{font-size:.6rem}
+.eq-t{font-size:.62rem}
+}
+@media(max-width:400px){
+.logo-section{gap:0}
+.logo-badge{border-radius:14px}
+.stats{grid-template-columns:1fr;gap:5px}
+.stat-card{padding:10px}
+.gr2,.gr3,.pg3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body><div id="scrollBar"></div>
+<div class="edge-t"></div>
+<div class="edge-b"></div>
+<div class="corner tl"></div>
+<div class="corner br"></div>
+<div class="bg-img"></div>
+<canvas id="particleCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:0"></canvas>
+<div class="bg-orb"><div class="o"></div><div class="o"></div><div class="o"></div></div>
+<div class="grid-ov"></div>
+<div class="scanline"></div>
+
+<header>
+<div class="container">
+
+<div class="badge-pr">
+<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0096ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+POLICE DIVISION
+</div>
+
+<div class="logo-section">
+<div class="logo-badge">
+<div class="ic">
+<img src="logo.png" alt="logo" style="width:100%;height:100%;object-fit:cover;border-radius:11px"/>
+</div>
+<div class="lb">
+<svg class="rh" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0096ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+<div>
+<span class="ar"><span>PRIME</span> EMPIRE <span>CFW</span></span>
+<span class="en">OFFICIAL SERVER</span>
+</div>
+</div>
+<a href="https://discord.gg/pem" target="_blank" class="disc-btn" title="انضم للسيرفر">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5865f2" stroke-width="2"><path d="M18.59 5.89c-1.23-.57-2.53-.99-3.89-1.23-.17.3-.33.61-.48.93-1.43-.22-2.87-.22-4.3 0-.15-.32-.31-.63-.48-.93-1.36.24-2.67.66-3.89 1.23C2.76 9.5 2.11 13.01 2.43 16.47c1.46 1.07 3.13 1.86 4.94 2.27.39-.53.74-1.09 1.05-1.68-.58-.22-1.13-.49-1.65-.82.14-.1.28-.2.41-.3 3.18 1.45 6.63 1.45 9.81 0 .13.1.27.2.41.3-.52.33-1.08.6-1.65.82.31.59.66 1.15 1.05 1.68 1.81-.41 3.48-1.2 4.94-2.27.38-4-.74-7.49-3.11-10.58zM8.52 14.36c-.99 0-1.8-.9-1.8-2 0-1.11.79-2 1.8-2 .99 0 1.8.9 1.8 2 0 1.11-.79 2-1.8 2zm6.96 0c-.99 0-1.8-.9-1.8-2 0-1.11.79-2 1.8-2 .99 0 1.8.9 1.8 2 0 1.11-.79 2-1.8 2z"/></svg>
+<span>prm</span>
+</a>
+</div>
+</div>
+
+<h1><span class="glow">قوانين الشرطة</span></h1>
+<p class="subtitle">LSPD</p>
+<p class="desc">الدليل الرسمي للقوانين والأنظمة الخاصة بمنتسبي جهاز الشرطة<br/>الالتزام بهذه القوانين واجب على جميع الأفراد</p>
+<div class="header-line">
+<div class="ln" style="background:linear-gradient(90deg,transparent,rgba(0,120,255,.5))"></div>
+<div class="dm"></div>
+<div class="ln" style="background:linear-gradient(90deg,rgba(0,120,255,.5),transparent)"></div>
+</div>
+</div>
+</header>
+
+<main class="container">
+
+<div class="live-bar g si" style="animation-delay:.05s">
+<span class="live-item"><span class="dot"></span> SERVER ONLINE <span class="tm" id="liveTime"></span></span>
+</div>
+
+<div class="stats si" style="animation-delay:.1s">
+<div class="stat-card g"><div class="num" data-target="12" data-suffix="">0</div><div class="lbl">أقسام القوانين</div></div>
+<div class="stat-card g"><div class="num" data-target="73" data-suffix="+">0</div><div class="lbl">مادة قانونية</div></div>
+<div class="stat-card g"><div class="num" data-target="10" data-suffix="">0</div><div class="lbl">قنوات راديو</div></div>
+</div>
+
+<input type="text" id="searchInput" class="g2 si" placeholder="🔍 بحث في القوانين..." style="animation-delay:.12s"/>
+
+<div class="filter-bar g si" style="animation-delay:.15s" id="filterBar">
+<button class="filter-btn active" onclick="setFilter('all')">الكل</button>
+</div>
+
+<div style="display:flex;gap:8px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
+<button class="filter-btn" id="expandAllBtn" onclick="expandAll()" style="color:#00c853;border-color:rgba(0,200,83,.2)">▼ فتح الكل</button>
+<button class="filter-btn" id="collapseAllBtn" onclick="collapseAll()" style="color:#ff5252;border-color:rgba(255,82,82,.2)">▲ إغلاق الكل</button>
+</div>
+
+<div class="nav-qs g2 si" style="animation-delay:.17s" id="quickNav"></div>
+
+<div id="sectionsContainer"></div>
+
+<div id="toast" class="toast"></div>
+</main>
+
+<div id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<div id="soundToggle" onclick="toggleSound()">SFX</div>
+<footer>
+<div class="ft-ln">
+<p>LSPD &copy; 2025 — ALL RIGHTS RESERVED</p>
+<span class="ver">v3.0 | POLICE CODE</span>
+</div>
+</footer>
+<script>
+const sections=[
+{id:'general',title:'القوانين العامة',subtitle:'General Rules',color:'#0078ff',
+svg:'<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/><line x1="12" y1="2" x2="12" y2="22"/>',
+rules:[
+'الالتزام التام بجميع القوانين والأنظمة والتعليمات الصادرة من القيادة',
+'الزي الرسمي إلزامي أثناء الخدمة مع المظهر اللائق والنظافة الشخصية',
+'المحافظة على المعدات والأسلحة الشخصية بحالة جهوزية تامة',
+'التعامل مع المواطنين باحترام ولباقة ضمن الإطار القانوني',
+'تقديم التقارير الدورية عن المهام المنجزة في نهاية كل مناوبة',
+'الالتزام بالتسلسل القيادي في جميع المعاملات الرسمية',
+'الحفاظ على سرية التحقيقات والمعلومات',
+'الالتزام بالمواعيد والحضور قبل المناوبة بـ 10 دقائق',
+'يمنع منعاً باتاً استخدام القوة المفرطة أثناء أداء الواجب',
+'إبلاغ القيادة فوراً في حال حدوث أي خرق أمني'
+]},
+{id:'shooting',title:'قوانين الرماية',subtitle:'Shooting Rules',color:'#ff3d00',
+svg:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>',
+ rules:[
+'يمنع إطلاق النار إلا في حالات الدفاع عن النفس أو الدفاع عن الآخرين',
+'التأكد من الهدف بوضوح قبل إطلاق النار لتجنب الإصابات الجانبية',
+'قواعد الاشتباك: (1) التحذير اللفظي (2) إطلاق نار تحذيري (3) التعامل مع الهدف',
+'يحظر استخدام السلاح خارج إطار المهام الرسمية',
+'فحص السلاح والتأكد من سلامته قبل وبعد كل استخدام',
+'التبليغ عن أي سلاح مفقود أو تالف فوراً']
+},
+{id:'criminals',title:'التعامل مع المجرمين',subtitle:'Criminal Handling',color:'#ff9500',
+svg:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M15 12l-3 3-3-3"/><line x1="12" y1="10" x2="12" y2="15"/>',
+rules:[
+'اتباع إجراءات التوقيف والاحتجاز حسب الأصول القانونية',
+'تفتيش المقبوض عليه وفق الضوابط وبحضور شاهد',
+'يحظر التعذيب أو المعاملة المهينة للموقوفين بأي شكل',
+'تسجيل محضر توقيف شامل يتضمن الأسباب والأدلة والتوقيت',
+'إحالة المقبوض عليه خلال 24 ساعة إلى النيابة العامة',
+'استخدام الأدوات المناسبة لتقييد الحركة حسب درجة الخطورة',
+'التأكد من الحالة الصحية للموقوف قبل وبعد التوقيف',
+'إبلاغ ذوي الموقوف فوراً وبالطرق الرسمية',
+'تصوير المقبوض عليه وتوثيق حالته عند الوصول'
+]},
+{id:'ram',title:'قوانين التيزر و النطح',subtitle:'Taser & Ram Rules',color:'#9c27b0',
+svg:'<polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/><line x1="12" y1="10" x2="12" y2="14"/><path d="M5 8l3 3M16 5l3 3"/><circle cx="12" cy="16" r="1" fill="#9c27b0"/>',
+
+
+subsections:[{
+subtitle:'قوانين استخدام النطح (Ram)',
+rules:[
+'يحظر استخدام النطح دون أمر مباشر من القائد المناوب',
+'عدم تجاوز 3 ثوانٍ من الاستخدام المتواصل (مدة آمنة)',
+'التأكد من أن المقبوض عليه لا يعاني من أمراض قلبية'
+]
+},{
+subtitle:'قوانين استخدام التيزر (Taser)',
+rules:[
+'يحظر استخدام التيزر على المناطق الحساسة (الرأس، الصدر، الرقبة)',
+'عدم تجاوز 5 ثوانٍ من الصعق المتواصل',
+'يحظر استخدام التيزر على السواق أو الأشخاص في الأماكن المرتفعة',
+'التأكد من عدم وجود سوائل قابلة للاشتعال قبل الاستخدام',
+'فحص الجهاز والتأكد من صلاحية البطارية قبل المناوبة',
+'تجنب استخدام التيزر على الأشخاص المقيدين أو المسيطر عليهم'
+]
+}]},
+{id:'paramedic',title:'التعامل مع الإسعافات',subtitle:'Paramedic Rules',color:'#00c853',
+svg:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/><circle cx="12" cy="12" r="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>',
+ rules:[
+'تقديم الإسعافات الأولية فوراً للمصابين قبل وصول الطواقم الطبية',
+'تأمين مكان الحادث وتوفير المسار الآمن لسيارات الإسعاف',
+'تحديد درجة الإصابة ونقل المصاب حسب الأولوية (Triage)',
+'التنسيق المسبق مع المستشفى قبل وصول الحالة',
+'تسجيل تقرير طبي كامل عن التدخل الإسعافي',
+'المحافظة على أدوات الإسعاف في حالة جهوزية تامة'
+]},
+{id:'clashes',title:'قوانين المواجهات',subtitle:'Combat Rules',color:'#ff6d00',
+svg:'<path d="M14.5 17.5L3 6l3-3 11.5 11.5"/><path d="M13 19l6-6"/><path d="M16 16l4 4"/><path d="M19 13l4-4"/><circle cx="18" cy="18" r="3"/>',
+ rules:[
+'استخدام أسلوب التصعيد التدريجي في المواجهات',
+'طلب تعزيزات فوراً عند الحاجة عبر الراديو',
+'تأمين المحيط وعزل منطقة المواجهة عن المدنيين',
+'الالتزام بخطة الانتشار والتغطية المتبادلة مع الزملاء',
+'تسجيل فيديو للمواجهة كاملاً لأغراض التحقيق',
+'تأمين مخارج الطوارئ قبل بدء المواجهة',
+'عدم فتح النار إلا في حالة الضرورة القصوى'
+]},
+{id:'chase',title:'قوانين المطاردة',subtitle:'Chase Rules',color:'#00bcd4',
+svg:'<circle cx="5" cy="18" r="3"/><circle cx="19" cy="18" r="3"/><path d="M12 18V6"/><path d="M8 10l4-4 4 4"/><path d="M5 18l7-12 7 12"/>',
+rules:[
+'تقييم خطورة المطاردة قبل البدء بها وفق معايير محددة',
+'إبلاغ غرفة العمليات ببداية المطاردة ونهايتها ومسارها',
+'يحظر استخدام السلاح أثناء المطاردة إلا في حالة الدفاع المباشر',
+'المطاردة تنتهي عند فقدان الاتصال البصري لمدة 30 ثانية',
+'توثيق المطاردة بكاميرا المركبة (Dashcam)',
+'يمنع مطاردة الدراجات النارية في الأزقة الضيقة',
+'يحظر مطاردة المشاة داخل الأسواق المزدحمة'
+]},
+{id:'radio',title:'قوانين الراديو',subtitle:'Radio Rules',color:'#e91e63',
+svg:'<path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 6a6 6 0 0 1 6 6"/><path d="M12 10a2 2 0 0 1 2 2"/><line x1="2" y1="2" x2="22" y2="22"/><path d="M12 14v4"/>',
+rules:[
+'استخدام لغة مهنية مختصرة وواضحة في التواصل اللاسلكي',
+'تحديد رمز النداء (Call Sign) لكل فرد قبل بداية المناوبة',
+'الإبلاغ الفوري عن أي طارئ عبر الراديو فور حدوثه',
+'تجنب المحادثات الشخصية على ترددات الراديو الرسمية',
+'استخدام المصطلحات القياسية المعتمدة في البلاغات',
+'يحظر استخدام الراديو بدون تدريب مسبق على البروتوكولات',
+'فحص جهاز الراديو والتأكد من شحن البطارية قبل المناوبة',
+'في حالة فقدان الاتصال: الانتقال للتردد البديل فوراً'
+],
+radioChannels:[
+{num:'1',desc:'التردد العام — لجميع الوحدات'},
+{num:'2',desc:'تردد الدوريات — لدوريات الشرطة'},
+{num:'3',desc:'تردد الطوارئ — للحالات العاجلة'},
+{num:'4',desc:'تردد التحقيقات — للمحققين'},
+{num:'5',desc:'تردد المرور — لإدارة المرور'},
+{num:'6',desc:'تردد المراقبة — للمراقبة الأمنية'},
+{num:'7',desc:'تردد العمليات — للقوات الخاصة'},
+{num:'8',desc:'تردد النجدة — لنداءات الاستغاثة'},
+{num:'9',desc:'تردد التعزيزات — لطلب الدعم'},
+{num:'10',desc:'تردد القيادة — للتواصل مع القيادة'}
+]},
+
+{id:'equipment',title:'قائمة المعدات',subtitle:'Equipment List',color:'#2e7d32',
+svg:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+ equipment:[
+{icon:'🔫',name:'مسدس خدمة',desc:'Glock 17 — عيار 9mm'},
+{icon:'⚡',name:'تيزر',desc:'Taser — صعق كهربائي'},
+{icon:'🚔',name:'دورية شرطة',desc:'Patrol Car'},
+{icon:'🏍️',name:'دراجة نارية',desc:'Police Bike'},
+{icon:'🎤',name:'مكبر صوت',desc:'Megaphone'},
+{icon:'📡',name:'جهاز راديو',desc:'Radio Comms'},
+{icon:'📹',name:'كاميرا جسد',desc:'Body Camera'},
+{icon:'🔗',name:'قيود',desc:'Handcuffs'},
+{icon:'🩹',name:'حقيبة إسعاف',desc:'Med Kit'}
+]},
+{id:'ranks',title:'الرتب والمناصب',subtitle:'Ranks & Positions',color:'#ff6f00',
+svg:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 11v4"/><path d="M10 13h4"/>',
+ranks:[
+{title:'Cadet',en:'متدرب',badge:'#78909c'},
+{title:'Solo Cadet',en:'متدرب منفرد',badge:'#90a4ae'},
+{title:'Officer I',en:'جندي',badge:'#26c6da'},
+{title:'Officer II',en:'جندي أول',badge:'#29b6f6'},
+{title:'Officer III',en:'عريف',badge:'#42a5f5'},
+{title:'Senior Officer',en:'وكيل رقيب',badge:'#66bb6a'},
+{title:'First Sergeant',en:'رقيب أول',badge:'#ab47bc'},
+{title:'Staff Sergeant',en:'رقيب',badge:'#7e57c2'},
+{title:'Lieutenant',en:'ملازم',badge:'#5c6bc0'},
+{title:'First Lieutenant',en:'ملازم أول',badge:'#3f51b5'},
+{title:'Captain',en:'نقيب',badge:'#ef5350'},
+{title:'Major',en:'رائد',badge:'#ff7043'},
+{title:'Colonel',en:'عقيد',badge:'#ffa726'},
+{title:'Deputy LSPD Chief',en:'نائب رئيس LSPD',badge:'#ff8f00'},
+{title:'LSPD Chief',en:'رئيس LSPD',badge:'#ff6f00'},
+{title:'Deputy Chief of Police',en:'نائب قائد الشرطة',badge:'#e65100'},
+{title:'Chief of Police',en:'قائد الشرطة',badge:'#d50000'},
+{title:'جنرال — مخصص لترتيب السناريو',en:'Strategy Team',badge:'#b71c1c'}
+]},
+{id:'promotion',title:'التدرج الوظيفي',subtitle:'Career Progression',color:'#00bfa5',
+svg:'<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><path d="M8 12h8"/><path d="M12 8v8"/>',
+promotions:[
+{from:'Cadet',to:'Solo Cadet'},
+{from:'Solo Cadet',to:'Officer I'},
+{from:'Officer I',to:'Officer II'},
+{from:'Officer II',to:'Officer III'},
+{from:'Officer III',to:'Senior Officer'},
+{from:'Senior Officer',to:'First Sergeant'},
+{from:'First Sergeant',to:'Staff Sergeant'},
+{from:'Staff Sergeant',to:'Lieutenant'},
+{from:'Lieutenant',to:'First Lieutenant'},
+{from:'First Lieutenant',to:'Captain'},
+{from:'Captain',to:'Major'},
+{from:'Major',to:'Colonel'},
+{from:'Colonel',to:'Deputy LSPD Chief'},
+{from:'Deputy LSPD Chief',to:'LSPD Chief'},
+{from:'LSPD Chief',to:'Deputy Chief of Police'},
+{from:'Deputy Chief of Police',to:'Chief of Police'},
+{from:'Chief of Police',to:'General'}
+]},
+
+{id:'management',title:'إدارة القضايا',subtitle:'Case Management',color:'#ffd600',
+svg:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><circle cx="18" cy="5" r="2" fill="#ffd600"/>',
+subsections:[{
+subtitle:'إجراءات فتح القضية',
+rules:[
+'تدوين جميع التفاصيل في محضر رسمي عند فتح القضية',
+'تصنيف القضية حسب درجة الخطورة (منخفضة / متوسطة / عالية)',
+'تعيين محقق رئيسي ومساعد لكل قضية',
+'توثيق جميع الأدلة والمستندات في ملف القضية',
+'تحديث حالة القضية بشكل دوري في النظام',
+'مراجعة القضية مع المشرف كل 48 ساعة',
+'أخذ إفادات الشهود والمتهم خلال 24 ساعة'
+]
+},{
+subtitle:'إجراءات إغلاق القضية',
+rules:[
+'مراجعة جميع ملفات القضية للتأكد من اكتمالها',
+'الحصول على موافقة النيابة أو القاضي المختص',
+'أرشفة القضية في مستودع الوثائق الرسمية',
+'إشعار جميع الأطراف بقرار الإغلاق'
+]
+}],
+panic:[
+{type:'PANIC',desc:'حالة طوارئ — استغاثة فورية',color:'#ff1744'}
+]}
+]
+let activeFilter="all"
+let soundOn=true
+let audioCtx=null
+function getAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
+function playClick(freq,e){if(!soundOn)return;try{const c=getAudio(),o=c.createOscillator(),g=c.createGain();o.type="sine";o.frequency.value=freq||520;g.gain.value=.04;g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.1);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.1)}catch(ex){}if(e&&e.stopPropagation)e.stopPropagation()}
+function playCopy(){if(!soundOn)return;try{const c=getAudio(),o=c.createOscillator(),g=c.createGain(),o2=c.createOscillator(),g2=c.createGain();o.type="sine";o.frequency.value=660;g.gain.value=.04;g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.08);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.08);o2.type="sine";o2.frequency.value=880;g2.gain.value=.03;g2.gain.exponentialRampToValueAtTime(.001,c.currentTime+.15);o2.connect(g2);g2.connect(c.destination);o2.start(c.currentTime+.05);o2.stop(c.currentTime+.15)}catch(ex){}}
+function toggleSound(){soundOn=!soundOn;document.getElementById("soundToggle").classList.toggle("on",soundOn)}
+function setFilter(id){activeFilter=id;document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));document.querySelectorAll('.filter-btn[data-filter="'+id+'"]').forEach(b=>b.classList.add("active"));renderSections()}
+function toggleSection(id,noClick){const b=document.getElementById("body-"+id),a=document.getElementById("arr-"+id),c=document.querySelector('.s-card[id="card-'+id+'"]');if(!b)return;b.classList.toggle("opn");if(a)a.classList.toggle("opn");if(c)c.classList.toggle("opn");if(!noClick)playClick(380);try{const o=JSON.parse(localStorage.getItem('lspd_open')||'[]');const i=o.indexOf(id);if(b.classList.contains('opn')){if(i<0)o.push(id)}else{if(i>=0)o.splice(i,1)}localStorage.setItem('lspd_open',JSON.stringify(o))}catch(ex){}}
+function expandAll(){sections.forEach(s=>{const b=document.getElementById('body-'+s.id);if(b&&!b.classList.contains('opn'))toggleSection(s.id,true)});showToast('▼ تم فتح جميع الأقسام')}
+function collapseAll(){sections.forEach(s=>{const b=document.getElementById('body-'+s.id);if(b&&b.classList.contains('opn'))toggleSection(s.id,true)});showToast('▲ تم إغلاق جميع الأقسام')}
+function sectionCount(s){let n=0;if(s.rules)n+=s.rules.length;if(s.subsections)s.subsections.forEach(sub=>n+=sub.rules.length);if(s.radioChannels)n+=s.radioChannels.length;if(s.ranks)n+=s.ranks.length;if(s.equipment)n+=s.equipment.length;if(s.promotions)n+=s.promotions.length;return n}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[m])}
+function showToast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200)}
+function copyRule(el,txt){if(!el||el.classList.contains("cpd"))return;navigator.clipboard.writeText(txt).then(()=>{playCopy();el.classList.add("cpd");el.textContent="✓";showToast('✓ تم النسخ');setTimeout(()=>{el.classList.remove("cpd");el.textContent="⎘"},1800)}).catch(()=>{})}
+function copyAll(sid){const s=sections.find(x=>x.id===sid);if(!s)return;let txts=[];if(s.rules)txts.push(...s.rules);if(s.subsections)s.subsections.forEach(sub=>{txts.push('--- '+sub.subtitle+' ---');txts.push(...sub.rules)});navigator.clipboard.writeText(txts.join('\n')).then(()=>{const btn=document.getElementById('ca-'+sid);if(btn){btn.textContent='✓';btn.classList.add('cpd');showToast('✓ تم نسخ جميع البنود');setTimeout(()=>{btn.textContent='📋 نسخ الكل';btn.classList.remove('cpd')},1800)}}).catch(()=>{})}
+function renderSections(){const c=document.getElementById("sectionsContainer"),f=activeFilter==="all"?sections:sections.filter(s=>s.id===activeFilter),q=(document.getElementById("searchInput")?.value||"").trim().toLowerCase();c.innerHTML="";f.forEach((s,idx)=>{if(q){const sMatch=s.title.includes(q)||s.subtitle.toLowerCase().includes(q);let rMatch=false;if(s.rules)rMatch=s.rules.some(r=>r.includes(q));if(s.subsections)rMatch=rMatch||s.subsections.some(sub=>sub.rules.some(r=>r.includes(q)));if(!sMatch&&!rMatch)return}const cd=document.createElement("div");cd.className="s-card g si";cd.id="card-"+s.id;cd.style.animationDelay=(idx*.05)+"s";cd.style.borderColor=s.color+"22";let h="";h+='<div class="in-dv" style="background:linear-gradient(90deg,transparent,'+s.color+'55,transparent)"></div>';if(s.rules)s.rules.forEach((r,ri)=>{let cls="r-item";if(q&&r.includes(q))cls+=" hl";h+='<div class="'+cls+'" onclick="playClick(520)"><span class="r-num" style="background:'+s.color+'22;color:'+s.color+'">'+(ri+1)+'</span><p class="r-txt">'+esc(r)+'</p><span class="cpy-btn" onclick="event.stopPropagation();copyRule(this,\''+esc(r)+'\')">⎘</span></div>'});
+if(s.extra)h+='<div class="ex-box" style="border-color:'+s.color+'33;background:'+s.color+'08"><h4 style="color:'+s.color+';font-size:.78rem;margin-bottom:4px;text-align:right">'+esc(s.extra.title)+'</h4><p style="color:rgba(255,255,255,.45);font-size:.78rem;line-height:1.7;text-align:right">'+esc(s.extra.content)+"</p></div>";if(s.subsections)s.subsections.forEach(sub=>{h+='<div class="sub-sec"><h3 class="sub-ttl" style="color:'+s.color+'">'+esc(sub.subtitle)+"</h3>";sub.rules.forEach((r,ri)=>{let cls="r-item";if(q&&r.includes(q))cls+=" hl";h+='<div class="'+cls+'" onclick="playClick(520)"><span class="r-num" style="background:'+s.color+'22;color:'+s.color+'">'+(ri+1)+'</span><p class="r-txt">'+esc(r)+'</p><span class="cpy-btn" onclick="event.stopPropagation();copyRule(this,\''+esc(r)+'\')">⎘</span></div>'})})
+if(s.radioChannels){h+='<div style="margin-top:14px"><h3 class="sub-ttl" style="color:'+s.color+'">قنوات الراديو</h3><div class="gr2">';s.radioChannels.forEach(ch=>{h+='<div class="ch-it"><span class="ch-no" style="background:'+s.color+'22;color:'+s.color+'">'+ch.num+'</span><span class="ch-ds">'+esc(ch.desc)+"</span></div>"});h+="</div></div>"}
+if(s.panic){h+='<div style="margin-top:14px"><h3 class="sub-ttl" style="color:'+s.color+'">حالة الطوارئ — PANIC</h3><div class="pg3">';s.panic.forEach(p=>{h+='<div class="pg-it" style="background:'+p.color+'12;border:1px solid '+p.color+'33"><p class="pt" style="color:'+p.color+'">'+esc(p.type)+'</p><p class="pd">'+esc(p.desc)+"</p></div>"});h+="</div></div>"}
+if(s.ranks){h+='<div style="margin-top:14px"><h3 class="sub-ttl" style="color:'+s.color+'">التسلسل القيادي</h3><div class="gr2">';s.ranks.forEach((rk,ri)=>{h+='<div class="rank-it" style="border-color:'+rk.badge+'33;background:'+rk.badge+'08"><span class="rank-no" style="background:'+rk.badge+'22;color:'+rk.badge+'">'+(ri+1)+'</span><div class="rank-info"><span class="rank-t" style="color:'+rk.badge+'">'+esc(rk.title)+'</span><span class="rank-en">'+esc(rk.en)+'</span></div></div>'});h+="</div></div>"}
+if(s.equipment){h+='<div style="margin-top:14px"><h3 class="sub-ttl" style="color:'+s.color+'">المعدات والتجهيزات</h3><div class="gr3">';s.equipment.forEach(eq=>{h+='<div class="eq-it" style="border-color:'+s.color+'22;background:'+s.color+'06"><span class="eq-ic">'+eq.icon+'</span><div class="eq-info"><span class="eq-t" style="color:'+s.color+'">'+esc(eq.name)+'</span><span class="eq-d">'+esc(eq.desc)+'</span></div></div>'});h+="</div></div>"}
+if(s.promotions){h+='<div style="margin-top:14px"><h3 class="sub-ttl" style="color:'+s.color+'">التدرج الوظيفي</h3>';s.promotions.forEach((p,pi)=>{h+='<div class="pen-it" style="border-color:'+s.color+'33;background:'+s.color+'06"><div class="pen-h" style="color:'+s.color+'"><span class="pen-lv">'+esc(p.from)+' → '+esc(p.to)+'</span></div></div>'});h+="</div>"}
+const cnt=sectionCount(s),svgC=s.svg||'<path d="M12 2L2 7l10 5 10-5-10-5z"/>',cLbl=cnt+'';
+cd.innerHTML='<div class="g-glow"></div><button class="s-hdr" onclick="toggleSection(\''+s.id+'\')"><div class="arr" id="arr-'+s.id+'">&#9660;</div><div class="lft"><div class="nfo"><h3>'+esc(s.title)+'</h3><p style="color:'+s.color+'">'+esc(s.subtitle)+' <span style="color:rgba(255,255,255,.15)">| '+cLbl+'</span></p></div><div class="ico" style="background:'+s.color+'22;border:1px solid '+s.color+'44"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="'+s.color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+svgC+'</svg></div></div></button><div class="s-body" id="body-'+s.id+'"><div style="display:flex;justify-content:flex-start;margin-bottom:6px"><span class="cpy-btn" id="ca-'+s.id+'" onclick="event.stopPropagation();copyAll(\''+s.id+'\')" style="width:auto;padding:3px 10px;font-size:.55rem;gap:4px">📋 نسخ الكل</span></div>'+h+'</div>'
+c.appendChild(cd)})}
+function initFilters(){const b=document.getElementById("filterBar");sections.forEach(s=>{const btn=document.createElement("button");btn.className="filter-btn";btn.dataset.filter=s.id;btn.textContent=s.title;btn.onclick=()=>setFilter(s.id);b.appendChild(btn)})}
+function initQuickNav(){const n=document.getElementById("quickNav");if(!n)return;n.innerHTML='';sections.forEach(s=>{const a=document.createElement('a');a.href='#';a.textContent=s.title;a.onclick=(e)=>{e.preventDefault();const el=document.getElementById('card-'+s.id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});if(!document.getElementById('body-'+s.id)?.classList.contains('opn'))toggleSection(s.id)}};n.appendChild(a)})}
+function animateCounters(){document.querySelectorAll(".stat-card .num").forEach(el=>{const t=parseInt(el.dataset.target)||0,s=el.dataset.suffix||"",d=parseInt(el.textContent)||0,st=performance.now();if(d===t)return;function up(now){const p=Math.min((now-st)/1200,1),v=Math.floor(p*t);el.textContent=v+s;if(p<1)requestAnimationFrame(up);else el.textContent=t+s}requestAnimationFrame(up)})}
+
+window.addEventListener("scroll",()=>{const h=document.documentElement;document.getElementById("scrollBar").style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+"%";document.getElementById("toTop").classList.toggle("show",h.scrollTop>300)})
+document.querySelectorAll(".g").forEach(el=>{el.addEventListener("mousemove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--mx",((e.clientX-r.left)/r.width*100)+"%");el.style.setProperty("--my",((e.clientY-r.top)/r.height*100)+"%")})})
+document.getElementById("searchInput")?.addEventListener("input",()=>renderSections())
+initFilters();initQuickNav();renderSections();setTimeout(animateCounters,500);setTimeout(()=>{try{const o=JSON.parse(localStorage.getItem('lspd_open')||'[]');o.forEach(id=>{const b=document.getElementById('body-'+id);if(b&&!b.classList.contains('opn'))toggleSection(id,true)})}catch(ex){}},150)
+//— Live clock
+(function fn(){const e=document.getElementById('liveTime');if(e){const d=new Date();e.textContent=d.toLocaleTimeString('en-US',{hour12:false,hour:'2-digit',minute:'2-digit'})}setTimeout(fn,1000)})();
+//— Particles
+(function(){const c=document.getElementById('particleCanvas');if(!c)return;const ctx=c.getContext('2d');let w,h,particles=[];function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}window.addEventListener('resize',resize);resize();const count=Math.min(80,Math.floor(w*h/12000));for(let i=0;i<count;i++){particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.8+.5,o:Math.random()*.35+.05})}function draw(){ctx.clearRect(0,0,w,h);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(0,150,255,'+p.o+')';ctx.fill()});particles.forEach((a,i)=>{for(let j=i+1;j<particles.length;j++){const b=particles[j];const dx=a.x-b.x,dy=a.y-b.y;const dist=Math.sqrt(dx*dx+dy*dy);if(dist<140){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(0,150,255,'+((1-dist/140)*.12)+')';ctx.lineWidth=.5;ctx.stroke()}}});requestAnimationFrame(draw)}draw()})();
+</script>
+</body>
+</html>
